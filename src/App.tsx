@@ -1,5 +1,10 @@
 import "./index.scss";
+import RadialSelector from "./components/layouts/RadialSelector";
 
-export default function App() {
-  return <div className="main">Main Page</div>;
-}
+const App = () => <RadialSelector />;
+
+export default App;
+
+
+
+

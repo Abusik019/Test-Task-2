@@ -1,0 +1,51 @@
+.radial-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.circle {
+  position: relative;
+  width: 530px;
+  height: 530px;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+
+.dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 56px;
+  height: 56px;
+  margin: -28px 0 0 -28px;
+  border-radius: 50%;
+  background: #555;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.dot__text{
+  opacity: 0;
+
+  text-align: left;
+
+  margin-left: 100%;
+  
+  transition: opacity 1s ease;
+
+  color: #000;
+}
+
+.dot__text.active{
+  opacity: 1;
+}
+
+.dot.active {
+  background: #00f0ff;
+}
