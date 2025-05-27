@@ -1,39 +1,19 @@
-import React, { useRef, useState } from "react";
-import { gsap } from "gsap";
 import "../style.scss";
+import { useRef, useState } from "react";
+import { gsap } from "gsap";
+import { circleItems } from "../../mocks";
+import { ArrowIcon } from "../../assets/ArrowIcon";
 
 const RADIUS = 265;
 const DOT_COUNT = 6;
 const ROTATION_PER_DOT = 360 / DOT_COUNT;
+const ANGLE_OFFSET = -60
 
-const circleItems = [
-    {
-        id: 1,
-        label: "Наука",
-    },
-    {
-        id: 2,
-        label: "Технологии",
-    },
-    {
-        id: 3,
-        label: "Кино",
-    },
-    {
-        id: 4,
-        label: "Спорт",
-    },
-    {
-        id: 5,
-        label: "Музыка",
-    },
-    {
-        id: 6,
-        label: "Искусство",
-    },
-]
+type Props = {
+    setActiveIndexTheme: (index: number) => void
+}
 
-const RadialSelector: React.FC = () => {
+const RadialSelector: React.FC<Props> = ({ setActiveIndexTheme }) => {
     const circleRef = useRef<HTMLDivElement | null>(null);
     const [activeIndex, setActiveIndex] = useState(0);
     const [rotation, setRotation] = useState(0);
@@ -57,10 +37,11 @@ const RadialSelector: React.FC = () => {
 
         setRotation(newRotation);
         setActiveIndex(index);
+        setActiveIndexTheme(index);
     };
 
     const dots = circleItems.map((item, i) => {
-        const angle = (i * ROTATION_PER_DOT * Math.PI) / 180;
+        const angle = (i * ROTATION_PER_DOT + ANGLE_OFFSET) * Math.PI / 180;
         const x = Math.cos(angle) * RADIUS;
         const y = Math.sin(angle) * RADIUS;
 
@@ -73,13 +54,43 @@ const RadialSelector: React.FC = () => {
                 }}
                 onClick={() => handleDotClick(i)}
             >
-                <span className={`dot__text ${i === activeIndex ? "active" : ""} `}>{item.label}</span>
+                <h2 className="dot__index">{item.id}</h2>
+                <span className="dot__text">{item.label}</span>
             </div>
         );
     });
 
     return (
-        <div className="radial-container">
+        <div className="radialContainer">
+            <div className="radialChanger">
+                <span>0{activeIndex + 1}/06</span>
+                <div>
+                    <button 
+                        className="radialBtn" 
+                        onClick={() => activeIndex > 0 && handleDotClick(activeIndex - 1)}
+                        disabled={activeIndex === 0}
+                        style={{ opacity: activeIndex === 0 ? 0.5 : 1 }}
+                    >
+                        <ArrowIcon 
+                            color="#42567A"
+                            strokeWidth="1.5"
+                            rotate={180}
+                        />
+                    </button>
+                    <button 
+                        className="radialBtn" 
+                        onClick={() => activeIndex < 6 && handleDotClick(activeIndex + 1)}
+                        disabled={activeIndex === 5}
+                        style={{ opacity: activeIndex === 5 ? 0.5 : 1 }}
+                    >
+                        <ArrowIcon 
+                            color="#42567A"
+                            strokeWidth="1.5"
+                            rotate={0}
+                        />
+                    </button>
+                </div>
+            </div>
             <div className="circle" ref={circleRef}>
                 {dots}
             </div>

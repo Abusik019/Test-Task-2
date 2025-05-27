@@ -1,14 +1,112 @@
-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  margin: 0;
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+*{
+    font-family: "PT Sans", sans-serif;
 }
 
-input, button, p {
-  width: 100%;
-  max-width: 300px;
-  margin-bottom: 10px;
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f4f5f9;
+}
+
+h1, h2, h3, h4, h5, h6, p, span {
+    margin: 0;
+}
+
+.app{
+    position: relative;
+
+    width: 1440px;
+    min-height: 100vh;
+    height: fit-content;
+
+    border-left: 1px solid #d5d9e3;
+    border-right: 1px solid #d5d9e3;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 96px;
+
+    padding: 215px 0 104px 0;
+    box-sizing: border-box;
+}
+
+.verticalLine{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 1px;
+    height: 100%;
+    background-color: #d5d9e3;
+    transform: translateX(-50%);
+}
+
+.gorizontalLine{
+    position: absolute;
+    top: 481px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #d5d9e3;
+
+    z-index: 0;
+}
+
+.title{
+    position: absolute;
+    left: -3px;
+    top: 170px;
+    overflow: hidden;
+
+    padding-left: 78px;
+    box-sizing: border-box;
+
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #42567A;
+
+    z-index: 999;
+    
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        padding-left: 5px; 
+        background: linear-gradient(180deg, #3877EE -5%, #EF5DA8 85%);
+        -webkit-mask: 
+            linear-gradient(white 0 0) content-box, 
+            linear-gradient(white 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+    }
+}
+
+.date{
+    position: absolute;
+    top: calc(50% - 160px);
+    left: calc(50% - 480px);
+
+    font-weight: 700;
+    font-size: 200px;
+    line-height: 160px;
+    letter-spacing: -2%;
+    text-align: center;
+
+    z-index: 998;
+    pointer-events: none;
+
+    >:first-child{
+        color: #5d5fef;
+    }
+
+    >:last-child{
+        color: #ef5da8;
+    }
 }
