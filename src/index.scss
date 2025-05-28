@@ -87,26 +87,3 @@ h1, h2, h3, h4, h5, h6, p, span {
         mask-composite: exclude;
     }
 }
-
-.date{
-    position: absolute;
-    top: calc(50% - 160px);
-    left: calc(50% - 480px);
-
-    font-weight: 700;
-    font-size: 200px;
-    line-height: 160px;
-    letter-spacing: -2%;
-    text-align: center;
-
-    z-index: 998;
-    pointer-events: none;
-
-    >:first-child{
-        color: #5d5fef;
-    }
-
-    >:last-child{
-        color: #ef5da8;
-    }
-}

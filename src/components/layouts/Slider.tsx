@@ -3,9 +3,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
-import "../style.scss";
 import { ArrowIcon } from "../../assets/ArrowIcon";
 import { circleItems } from "../../mocks";
+import "../style.scss";
 
 type Props = {
     activeIndexTheme?: number;
@@ -19,16 +19,19 @@ const Slider: React.FC<Props> = ({ activeIndexTheme }) => {
     const [opacity, setOpacity] = useState(1);
     const prevTheme = useRef(activeIndexTheme);
 
+    const [displayedTheme, setDisplayedTheme] = useState(activeIndexTheme);
+
     useEffect(() => {
         if (prevTheme.current !== activeIndexTheme) {
             setOpacity(0);
             setTimeout(() => {
                 setActiveIndex(0);
+                setDisplayedTheme(activeIndexTheme);
                 if (swiperRef.current) {
-                    swiperRef.current.slideTo(0, 0); 
+                    swiperRef.current.slideTo(0, 0);
                 }
                 setOpacity(1);
-            }, 700); 
+            }, 300); 
             prevTheme.current = activeIndexTheme;
         }
     }, [activeIndexTheme]);
@@ -84,8 +87,8 @@ const Slider: React.FC<Props> = ({ activeIndexTheme }) => {
                         setIsEnd(swiper.isEnd);
                     }}
                 >
-                    {activeIndexTheme !== undefined &&
-                        circleItems[activeIndexTheme].items.map((item, index) => (
+                    {displayedTheme !== undefined &&
+                        circleItems[displayedTheme].items.map((item, index) => (
                             <SwiperSlide key={index}>
                                 <div className="slide">
                                     <h3 className="slideYear">{item.year}</h3>
@@ -94,7 +97,8 @@ const Slider: React.FC<Props> = ({ activeIndexTheme }) => {
                                     </p>
                                 </div>
                             </SwiperSlide>
-                        ))}
+                        ))
+                    }
                 </Swiper>
             </div>
         </div>
