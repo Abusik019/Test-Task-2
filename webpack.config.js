@@ -11,6 +11,7 @@ module.exports = {
         filename: "bundle.js",
         path: path.resolve(__dirname, "dist"),
         clean: true,
+        publicPath: '',
     },
     resolve: {
         extensions: [".tsx", ".ts", ".js"],
@@ -44,6 +45,7 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: "./public/index.html",
+            filename: 'index.html',
         }),
         !isDev && new MiniCssExtractPlugin(),
     ].filter(Boolean), 
